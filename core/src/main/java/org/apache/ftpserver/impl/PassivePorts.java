@@ -207,6 +207,7 @@ public class PassivePorts {
             // Otherwise, pick one at random
             int i = r.nextInt(freeCopy.size());
             Integer ret = freeCopy.get(i);
+            log.debug("Attempting to reserve port: '{}'", ret);
 
             if (ret == 0) {
                 // "Any" port should not be removed from our free list,
@@ -215,8 +216,10 @@ public class PassivePorts {
 
             } else if (checkPortUnbound(ret)) {
                 // Not used by someone else, so lets reserve it and return it
+                log.debug("Reserving port: '{}'", ret);
                 freeList.remove(i);
                 usedList.add(ret);
+                log.debug(stats());
                 return ret;
 
             } else {
@@ -230,13 +233,15 @@ public class PassivePorts {
     }
 
     public synchronized void releasePort(final int port) {
+        log.debug("Attempting to release port: '{}'", port);
+
         if (port == 0) {
             // Ignore port 0 being released,
             // since its not put on the used list
 
         } else if (usedList.remove(port)) {
             freeList.add(port);
-
+            log.debug(stats());
         } else {
             // log attempt to release unused port
             log.warn("Releasing unreserved passive port: " + port);
