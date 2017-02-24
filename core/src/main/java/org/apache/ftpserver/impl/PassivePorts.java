@@ -265,16 +265,20 @@ public class PassivePorts {
         return sb.toString();
     }
 
-    public int freePorts() {
+    public int freePortsCount() {
         return freeList.size();
     }
 
-    public int usedPorts() {
+    public int usedPortsCount() {
         return usedList.size();
     }
 
+    public List<Integer> freePorts() { return freeList; }
+
+    public Set<Integer> usedPorts() { return usedList; }
+
     public String stats() {
-        return "Free Ports " + freePorts() + " and Used Ports " + usedPorts();
+        return "Free Ports " + freePortsCount() + " and Used Ports " + usedPortsCount();
     }
 
 }
