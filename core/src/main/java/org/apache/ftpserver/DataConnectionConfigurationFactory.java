@@ -50,7 +50,6 @@ public class DataConnectionConfigurationFactory {
     
     private String passiveAddress;
     private String passiveExternalAddress;
-    //private PassivePorts passivePorts = new PassivePorts(Collections.<Integer>emptySet(), true);
     private PassivePortResolver passivePortResolver;
     private boolean implicitSsl;
 
